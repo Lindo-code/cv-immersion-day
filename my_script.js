@@ -1,6 +1,9 @@
+const axios = require("axios");
+
 document.addEventListener('DOMContentLoaded', () => {
     
 });
+
 // USE TO GET LOCATION
 function getLocation() {
    
