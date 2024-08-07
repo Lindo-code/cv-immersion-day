@@ -9,13 +9,13 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./my_script.js":
-/*!**********************!*\
-  !*** ./my_script.js ***!
-  \**********************/
+/***/ "./src/my_script.js":
+/*!**************************!*\
+  !*** ./src/my_script.js ***!
+  \**************************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const axios = __webpack_require__(/*! axios */ \"./node_modules/axios/dist/browser/axios.cjs\");\nconst WEATHER_API_KEY = \"af8b8440182a240e16c7a1987b286f5f\";\nconst NEWS_API_KEY = \"f05b7df383f445b5be99a40b0f379b58\";\n\nconst urls = {\n    weather: (lat, lon) => `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEY}`,\n    news: (country) => `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${NEWS_API_KEY}`\n}\ndocument.addEventListener('DOMContentLoaded', () => {\n    retrieveLocation()\n});\n\n// USE TO GET LOCATION\nfunction retrieveLocation() {\n    (navigator.geolocation) ? navigator.geolocation.getCurrentPosition(showPosition) : document.getElementById('weather-data').textContent = \"Geolocation is not supported by this browser.\";\n}\n\n// USE TO DISPLAY POSITION\nfunction showPosition(myPosition) {\n   const latitude = myPosition.coords.latitude, longitude = myPosition.coords.longitude;\n   retrieveData(latitude, longitude);\n}\n\n// HANDLE ERRORS\nfunction displayErrors(error) {\n   \n}\n\n// RETRIEVE WEATHER DATA FROM API\nasync function retrieveData(latitude, longitude) {\n   const response = await axios.get(urls.weather(latitude, longitude));\n   await retrieveNews(response.data.sys.country);\n   console.log(response.data.sys.country);\n}\n\n// RETIEVE NEWS FROM API\nasync function retrieveNews(country) {\n    const response = await axios.get(urls.news(country));\n    const news = response.data.articles.map(article => `\n        <article>\n            <h3>${article.title}</h3>\n            <a href=\"${article.url}\" target=\"_blank\">Read more</a>\n        </article>\n    `).join('');\n    // console.log(news)\n    document.getElementById('latest-news').innerHTML = news;\n}\n\n//# sourceURL=webpack://cv-immersion-day/./my_script.js?");
+eval("const axios = __webpack_require__(/*! axios */ \"./node_modules/axios/dist/browser/axios.cjs\");\n// const WEATHER_API_KEY = \"af8b8440182a240e16c7a1987b286f5f\";\n// const NEWS_API_KEY = \"f05b7df383f445b5be99a40b0f379b58\";\n\nconst urls = {\n    weather: (lat, lon) => `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${\"af8b8440182a240e16c7a1987b286f5f\"}`,\n    news: (country) => `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${\"f05b7df383f445b5be99a40b0f379b58\"}`\n}\ndocument.addEventListener('DOMContentLoaded', () => {\n    retrieveLocation()\n});\n\n// USE TO GET LOCATION\nfunction retrieveLocation() {\n    (navigator.geolocation) ? navigator.geolocation.getCurrentPosition(showPosition) : document.getElementById('weather-data').textContent = \"Geolocation is not supported by this browser.\";\n}\n\n// USE TO DISPLAY POSITION\nfunction showPosition(myPosition) {\n   const latitude = myPosition.coords.latitude, longitude = myPosition.coords.longitude;\n   retrieveData(latitude, longitude);\n}\n\n// HANDLE ERRORS\nfunction displayErrors(error) {\n   \n}\n\n// RETRIEVE WEATHER DATA FROM API\nasync function retrieveData(latitude, longitude) {\n   const response = await axios.get(urls.weather(latitude, longitude));\n   await retrieveNews(response.data.sys.country);\n   console.log(response.data.sys.country);\n}\n\n// RETIEVE NEWS FROM API\nasync function retrieveNews(country) {\n    const response = await axios.get(urls.news(country));\n    const news = response.data.articles.map(article => `\n        <article>\n            <h3>${article.title}</h3>\n            <a href=\"${article.url}\" target=\"_blank\">Read more</a>\n        </article>\n    `).join('');\n    // console.log(news)\n    document.getElementById('latest-news').innerHTML = news;\n}\n\n//# sourceURL=webpack://cv-immersion-day/./src/my_script.js?");
 
 /***/ }),
 
@@ -74,7 +74,7 @@ eval("// Axios v1.7.3 Copyright (c) 2024 Matt Zabriskie and contributors\n\n\nfu
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./my_script.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/my_script.js");
 /******/ 	
 /******/ })()
 ;

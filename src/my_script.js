@@ -1,10 +1,8 @@
 const axios = require("axios");
-const WEATHER_API_KEY = "af8b8440182a240e16c7a1987b286f5f";
-const NEWS_API_KEY = "f05b7df383f445b5be99a40b0f379b58";
 
 const urls = {
-    weather: (lat, lon) => `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${WEATHER_API_KEY}`,
-    news: (country) => `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${NEWS_API_KEY}`
+    weather: (lat, lon) => `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.WEATHER_API_KEY}`,
+    news: (country) => `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${process.env.NEWS_API_KEY}`
 }
 document.addEventListener('DOMContentLoaded', () => {
     retrieveLocation()
