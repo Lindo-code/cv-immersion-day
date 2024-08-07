@@ -43,3 +43,5 @@ async function retrieveNews(country) {
     // console.log(news)
     document.getElementById('latest-news').innerHTML = news;
 }
+
+module.exports = {urls};
