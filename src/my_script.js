@@ -64,7 +64,7 @@ async function retrieveNews(countryCode, country) {
 
 function displayWeather(response) {
   const weatherIconCode = response.data.weather[0].icon; // e.g., "04d"
-  const weatherIconUrl = `http://openweathermap.org/img/wn/${weatherIconCode}.png`;
+  const weatherIconUrl = `https://openweathermap.org/img/wn/${weatherIconCode}.png`;
   const weatherData = `
     <h2>${response.data.name}</h2>
     <img src="${weatherIconUrl}" alt="">
