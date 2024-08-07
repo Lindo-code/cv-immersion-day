@@ -18,6 +18,18 @@ header {
 .cv-section {
     margin-bottom: 20px;
 }
+.icon-spacing {
+    margin-right: 8px;
+  }
+#weather {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 200px;
+    margin: 60px;
+}
 
 #weather-data, #news-data {
     margin-top: 10px;
