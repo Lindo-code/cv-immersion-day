@@ -27,8 +27,8 @@ jobs:
         npm install
         npx webpack
       env:
-        REACT_APP_APIKey: ${{ secrets.WEATHER_API_KEY }}
-        REACT_APP_APISecret: ${{ secrets.NEWS_API_KEY }}
+        WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+        NEWS_API_KEY: ${{ secrets.NEWS_API_KEY }}
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
