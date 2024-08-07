@@ -31,7 +31,7 @@ async function retrieveData(latitude, longitude) {
   const response = await axios.get(urls.weather(latitude, longitude));
   const countryCode = response.data.sys.country;
   const country = await getCountryNameFromCode(countryCode);
-  await retrieveNews(countryCode, country);
+//   await retrieveNews(countryCode, country);
   displayWeather(response);
 }
 
