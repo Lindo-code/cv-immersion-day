@@ -47,7 +47,6 @@ async function getCountryNameFromCode(code) {
 
 async function retrieveNews(countryCode, country) {
   const response = await axios.get(urls.news(countryCode));
-  console.log(response.data.articles);
   const news = response.data.news
     .map(
       (article) => `
@@ -59,7 +58,7 @@ async function retrieveNews(countryCode, country) {
     `
     )
     .join("");
-  document.getElementById("latest-news-main").innerHTML = `<h2>Latest News In ${country}</h2>`;
+  document.getElementById("latest-news-main").innerHTML = `<h3><i class="fa-regular fa-newspaper icon-spacing"></i> Latest News In ${country}</h3>`;
   document.getElementById("latest-news").innerHTML = news;
 }
 
