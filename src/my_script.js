@@ -4,7 +4,7 @@ const urls = {
   weather: (lat, lon) =>
     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${process.env.WEATHER_API_KEY}`,
   news: (country) =>
-    `https://newsapi.org/v2/top-headlines?country=${country}&apiKey=${process.env.NEWS_API_KEY}`,
+    `https://api.currentsapi.services/v1/latest-news?country=${country}&apiKey=${process.env.NEWS_API_KEY}`,
 };
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -31,7 +31,7 @@ async function retrieveData(latitude, longitude) {
   const response = await axios.get(urls.weather(latitude, longitude));
   const countryCode = response.data.sys.country;
   const country = await getCountryNameFromCode(countryCode);
-//   await retrieveNews(countryCode, country);
+  await retrieveNews(countryCode, country);
   displayWeather(response);
 }
 
@@ -48,13 +48,14 @@ async function getCountryNameFromCode(code) {
 async function retrieveNews(countryCode, country) {
   const response = await axios.get(urls.news(countryCode));
   console.log(response.data.articles);
-  const news = response.data.articles
+  const news = response.data.news
     .map(
       (article) => `
         <article>
-            <h3>${article.title}</h3>
-            <a href="${article.url}" target="_blank">Read more</a>
-        </article>
+              <h3>${article.title}</h3>
+              <p>${article.description}</p>
+              <a href="${article.url}" target="_blank">Read more</a>
+          </article>
     `
     )
     .join("");
