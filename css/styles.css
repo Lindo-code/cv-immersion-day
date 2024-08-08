@@ -1,246 +1,276 @@
 :root {
-    --background: #E5E7E6;
-    --foreground: #1e1e1e;
-    --card-background: #ffffff;
-    --card-foreground: #1e1e1e;
-    --primary: #1e1e1e;
-    --primary-foreground: #ffffff;
-    --secondary: #f5f5f5;
-    --secondary-foreground: #1e1e1e;
-    --muted: #f5f5f5;
-    --muted-foreground: #757575;
-    --radius: 0.5rem;
-    --background-image: url('./5026563.jpg');
+  --background: #e5e7e6;
+  --foreground: #1e1e1e;
+  --card-background: #ffffff;
+  --card-foreground: #1e1e1e;
+  --primary: #1e1e1e;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #1e1e1e;
+  --muted: #f5f5f5;
+  --muted-foreground: #757575;
+  --radius: 0.5rem;
+  --background-image: url("./5026563.jpg");
 }
 
 body {
-    background-color: var(--background);
-    color: var(--foreground);
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 .container {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 2rem;
-    box-sizing: border-box;
-    background-image: var(--background-image); /* Set background image */
-    background-size: cover; /* Cover the container */
-    background-position: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  box-sizing: border-box;
+  background-image: var(--background-image); /* Set background image */
+  background-size: cover; /* Cover the container */
+  background-position: center;
+  max-height: 100vh;
+  overflow-y: scroll;
 }
 
 .profile {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 .profile-image {
-    position: relative;
-    width: 10rem;
-    height: 10rem;
-    border-radius: 50%;
-    overflow: hidden;
+  position: relative;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .profile-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-.profile-info {
-    text-align: center;
-    gap: 0.5rem;
+.profile-card {
+  background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent white */
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 90%;
 }
 
 .name {
-    font-size: 1.875rem;
-    font-weight: bold;
+  text-align: center;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.profile-info h1 {
+  font-size: 1.875rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.profile-info h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+.profile-info p {
+  color: var(--muted-foreground);
+  font-size: 1rem;
+  margin: 0.5rem 0;
 }
 
 .description {
-    color: var(--muted-foreground);
-    text-align: left;
+  color: var(--muted-foreground);
+  text-align: left;
 }
 
 .cards {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
 }
 
 .card {
-    background-color: var(--card-background);
-    border-radius: var(--radius);
-    padding: 1.5rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    flex: 1;
+  background-color: var(--card-background);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  flex: 1;
 }
 
 .card-title {
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
 }
 
 .weather-info {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .weather-icon-color {
-    color: gold; 
-    margin: 5px;
+  color: gold;
+  margin: 5px;
 }
 
 .weather-icon {
-    background-color: var(--card-background);
-    border-radius: 50%;
-    padding: 0.75rem;
-    color: var(--primary-foreground);
+  background-color: var(--card-background);
+  border-radius: 50%;
+  padding: 0.75rem;
+  color: var(--primary-foreground);
 }
 
 .weather-details {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .temperature {
-    font-size: 1.5rem;
-    font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .weather-description {
-    color: var(--muted-foreground);
+  color: var(--muted-foreground);
 }
 
 .news-items {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  overflow-y: auto;
 }
 
 .news-items::-webkit-scrollbar {
-    display: none;
+  display: none;
 }
 
 .news-item {
-    display: flex;
-    align-items: start;
-    gap: 1rem;
+  display: flex;
+  align-items: start;
+  gap: 1rem;
 }
 
 .news-icon-color {
-    color: #164AA9; 
-    margin: 5px;
+  color: #164aa9;
+  margin: 5px;
 }
 
 .news-info {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .news-title {
-    font-size: 1.125rem;
-    font-weight: bold;
+  font-size: 1.125rem;
+  font-weight: bold;
 }
 
 .news-description {
-    color: var(--muted-foreground);
+  color: var(--muted-foreground);
 }
 
 a.read-more {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: #C03C37;
-    color: var(--primary-foreground);
-    text-decoration: none;
-    border-radius: var(--radius);
-    font-weight: bold;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    margin: 1rem auto 0;
-    text-align: center; 
-    width: auto; 
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #c03c37;
+  color: var(--primary-foreground);
+  text-decoration: none;
+  border-radius: var(--radius);
+  font-weight: bold;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin: 1rem auto 0;
+  text-align: center;
+  width: auto;
 }
 
 a.read-more:hover {
-    background-color: var(--primary-foreground);
-    color: var(--primary);
+  background-color: var(--primary-foreground);
+  color: var(--primary);
 }
 
 footer {
-    background: url('https://image.freepik.com/free-vector/abstract-white-shapes-background_12628435.htm#query=abstract%20background&position=14&from_view=keyword&track=ais_hybrid&uuid=9e8951be-5a34-4e2e-aabc-ca18e8ff0b37') no-repeat center center;
-    background-size: cover;
-    padding: 1rem;
-    text-align: center;
-    background-color: #E5E7E6;
-    text-align: center;
-    font-size: 0.875rem;
-    color: var(--muted-foreground);
+  background: url("https://image.freepik.com/free-vector/abstract-white-shapes-background_12628435.htm#query=abstract%20background&position=14&from_view=keyword&track=ais_hybrid&uuid=9e8951be-5a34-4e2e-aabc-ca18e8ff0b37")
+    no-repeat center center;
+  background-size: cover;
+  padding: 1rem;
+  text-align: center;
+  background-color: #e5e7e6;
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
 }
 
 footer a {
-    color: var(--primary);
-    text-decoration: none;
+  color: var(--primary);
+  text-decoration: none;
 }
 
 footer a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
-
 @media (max-width: 800px) {
-    .container {
-        padding: 1rem;
-        height: 100vh;
-    }
+  .container {
+    padding: 1rem;
+    height: 100%;
+    width: 99%;
+  }
 
-    .cards {
-        flex-direction: column;
-    }
+  .cards {
+    flex-direction: column;
+  }
 
-    .card {
-        width: 90%;
-        padding: 1rem;
-    }
+  .card {
+    padding: 1rem;
+  }
 
-    .weather-info {
-        flex-direction: column;
-        text-align: center;
-    }
+  .weather-info {
+    flex-direction: column;
+    text-align: center;
+  }
 
-    .news-items {
-        flex-direction: column;
-        gap: 1rem;
-    }
+  .news-items {
+    flex-direction: column;
+    gap: 1rem;
+  }
 
-    .news-item {
-        flex-direction: column;
-        align-items: center;
-    }
+  .news-item {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 @media (min-width: 801px) {
-    .cards {
-        flex-direction: row;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-    }
+  .cards {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
 
-    .card {
-        flex: 1;
-        max-width: 48%;
-    }
+  .card {
+    flex: 1;
+    max-width: 48%;
+  }
 
-    .news-items {
-        max-height: 400px;
-        overflow-y: auto;
-    }
+  .news-items {
+    max-height: 400px;
+    overflow-y: auto;
+  }
 }
