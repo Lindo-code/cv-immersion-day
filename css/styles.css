@@ -65,6 +65,7 @@ body {
 
 .description {
     color: var(--muted-foreground);
+    text-align: left;
 }
 
 .cards {
