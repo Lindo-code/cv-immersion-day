@@ -28,7 +28,7 @@ async function retrieveNews(countryCode, country) {
             <div class="news-info">
               <h3 class="news-title">${article.title}</h3>
               <p class="news-description">${article.description}</p>
-              <a href="${article.url}" target="_blank">Read more</a>
+              <a href="${article.url}" target="_blank" class="read-more">Read more</a>
             </div>
           </div>
         `

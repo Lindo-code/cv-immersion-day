@@ -10,6 +10,7 @@
     --muted: #f5f5f5;
     --muted-foreground: #757575;
     --radius: 0.5rem;
+    --background-image: url('./5026563.jpg');
 }
 
 body {
@@ -26,6 +27,9 @@ body {
     margin: 0 auto;
     padding: 2rem;
     box-sizing: border-box;
+    background-image: var(--background-image); /* Set background image */
+    background-size: cover; /* Cover the container */
+    background-position: center;
 }
 
 .profile {
@@ -37,8 +41,8 @@ body {
 
 .profile-image {
     position: relative;
-    width: 8rem;
-    height: 8rem;
+    width: 10rem;
+    height: 10rem;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -90,6 +94,11 @@ body {
     gap: 1rem;
 }
 
+.weather-icon-color {
+    color: gold; 
+    margin: 5px;
+}
+
 .weather-icon {
     background-color: var(--primary);
     border-radius: 50%;
@@ -118,15 +127,19 @@ body {
     overflow-y: auto;
 }
 
+.news-items::-webkit-scrollbar {
+    display: none;
+}
+
 .news-item {
     display: flex;
     align-items: start;
     gap: 1rem;
 }
 
-.news-item img {
-    border-radius: var(--radius);
-    object-fit: cover;
+.news-icon-color {
+    color: #164AA9; 
+    margin: 5px;
 }
 
 .news-info {
@@ -143,9 +156,49 @@ body {
     color: var(--muted-foreground);
 }
 
+a.read-more {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #C03C37;
+    color: var(--primary-foreground);
+    text-decoration: none;
+    border-radius: var(--radius);
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 1rem auto 0;
+    text-align: center; 
+    width: auto; 
+}
+
+a.read-more:hover {
+    background-color: var(--primary-foreground);
+    color: var(--primary);
+}
+
+footer {
+    background: url('https://image.freepik.com/free-vector/abstract-white-shapes-background_12628435.htm#query=abstract%20background&position=14&from_view=keyword&track=ais_hybrid&uuid=9e8951be-5a34-4e2e-aabc-ca18e8ff0b37') no-repeat center center;
+    background-size: cover;
+    padding: 1rem;
+    text-align: center;
+    background-color: #E5E7E6;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--muted-foreground);
+}
+
+footer a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+
 @media (max-width: 800px) {
     .container {
         padding: 1rem;
+        height: 100vh;
     }
 
     .cards {
