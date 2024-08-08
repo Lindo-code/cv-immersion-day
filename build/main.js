@@ -9,13 +9,33 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/my_script.js":
-/*!**************************!*\
-  !*** ./src/my_script.js ***!
-  \**************************/
+/***/ "./src/helpers/helper_functions.js":
+/*!*****************************************!*\
+  !*** ./src/helpers/helper_functions.js ***!
+  \*****************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("const axios = __webpack_require__(/*! axios */ \"./node_modules/axios/dist/browser/axios.cjs\");\n\nconst urls = {\n  weather: (lat, lon) =>\n    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${\"af8b8440182a240e16c7a1987b286f5f\"}`,\n  news: (country) =>\n    `https://api.currentsapi.services/v1/latest-news?country=${country}&apiKey=${\"bWZMYtpT0ydba_KXHp_jmvl51HdhozpKXpEE00BRYaZXl31Q\"}`,\n};\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  retrieveLocation();\n});\n\nfunction retrieveLocation() {\n  navigator.geolocation\n    ? navigator.geolocation.getCurrentPosition(showPosition)\n    : (document.getElementById(\"weather-data\").textContent =\n        \"Geolocation is not supported by this browser.\");\n}\n\nfunction showPosition(myPosition) {\n  const latitude = myPosition.coords.latitude,\n    longitude = myPosition.coords.longitude;\n  retrieveData(latitude, longitude);\n}\n\n// HANDLE ERRORS\nfunction displayErrors(error) {}\n\nasync function retrieveData(latitude, longitude) {\n  const response = await axios.get(urls.weather(latitude, longitude));\n  const countryCode = response.data.sys.country;\n  const country = await getCountryNameFromCode(countryCode);\n  await retrieveNews(countryCode, country);\n  displayWeather(response);\n}\n\nasync function getCountryNameFromCode(code) {\n    try {\n        const response = await axios.get(`https://restcountries.com/v3.1/alpha/${code}`);\n        return response.data[0].name.common;\n    } catch (error) {\n        console.error('Error retrieving country name:', error);\n        return code;\n    }\n}\n\nasync function retrieveNews(countryCode, country) {\n  const response = await axios.get(urls.news(countryCode));\n  const news = response.data.news\n    .map(\n      (article) => `\n        <article>\n              <h3>${article.title}</h3>\n              <p>${article.description}</p>\n              <a href=\"${article.url}\" target=\"_blank\">Read more</a>\n          </article>\n    `\n    )\n    .join(\"\");\n  document.getElementById(\"latest-news-main\").innerHTML = `<h3><i class=\"fa-regular fa-newspaper icon-spacing\"></i> Latest News In ${country}</h3>`;\n  document.getElementById(\"latest-news\").innerHTML = news;\n}\n\nfunction displayWeather(response) {\n  const weatherIconCode = response.data.weather[0].icon; // e.g., \"04d\"\n  const weatherIconUrl = `https://openweathermap.org/img/wn/${weatherIconCode}.png`;\n  const weatherData = `\n    <h2>${response.data.name}</h2>\n    <img src=\"${weatherIconUrl}\" alt=\"\">\n    <p>Temperature: ${response.data.main.temp}°C</p>\n    <p>Weather: ${response.data.weather[0].description}</p>\n`;\n  document.getElementById(\"weather-data\").innerHTML = weatherData;\n}\n\nmodule.exports = { urls };\n\n\n//# sourceURL=webpack://cv-immersion-day/./src/my_script.js?");
+eval("const axios = __webpack_require__(/*! axios */ \"./node_modules/axios/dist/browser/axios.cjs\");\nconst { domElements, urls } = __webpack_require__(/*! ./helper_objects */ \"./src/helpers/helper_objects.js\");\n\nfunction displayErrors(error) {\n  console.error(\"Error:\", error);\n  domElements.weather.textContent = \"Error retrieving location.\";\n}\n\nasync function getCountryNameFromCode(code) {\n  try {\n    const response = await axios.get(\n      `https://restcountries.com/v3.1/alpha/${code}`\n    );\n    return response.data[0].name.common;\n  } catch (error) {\n    console.error(\"Error retrieving country name:\", error);\n    return code;\n  }\n}\n\nasync function retrieveNews(countryCode, country) {\n  try {\n    const newsResponse = await axios.get(urls.news(countryCode));\n    const news = newsResponse.data.news\n      .map(\n        (article) => `\n          <div class=\"news-item\">\n            <div class=\"news-info\">\n              <h3 class=\"news-title\">${article.title}</h3>\n              <p class=\"news-description\">${article.description}</p>\n              <a href=\"${article.url}\" target=\"_blank\">Read more</a>\n            </div>\n          </div>\n        `\n      )\n      .join(\"\");\n    domElements.news.innerHTML = `\n        <h3>${country}</h3>\n        ${news}\n      `;\n  } catch (error) {\n    console.error(\"Error retrieving news:\", error);\n    domElements.news.textContent = \"Error retrieving news.\";\n  }\n}\n\nfunction displayWeather(response) {\n  const weatherIconCode = response.data.weather[0].icon; // e.g., \"04d\"\n  const weatherIconUrl = `https://openweathermap.org/img/wn/${weatherIconCode}.png`;\n  const weatherData = `\n      <div class=\"weather-icon\">\n        <img src=\"${weatherIconUrl}\" alt=\"${response.data.weather[0].description}\">\n      </div>\n      <div class=\"weather-details\">\n        <h2>${response.data.name}</h2>\n        <div class=\"temperature\">${response.data.main.temp}°C</div>\n        <div class=\"weather-description\">${response.data.weather[0].description}</div>\n      </div>\n    `;\n  domElements.weather.innerHTML = weatherData;\n}\n\nmodule.exports = {\n  getCountryNameFromCode,\n  displayErrors,\n  displayWeather,\n  retrieveNews,\n};\n\n\n//# sourceURL=webpack://cv-immersion-day/./src/helpers/helper_functions.js?");
+
+/***/ }),
+
+/***/ "./src/helpers/helper_objects.js":
+/*!***************************************!*\
+  !*** ./src/helpers/helper_objects.js ***!
+  \***************************************/
+/***/ ((module) => {
+
+eval("const urls = {\n  weather: (lat, lon) =>\n    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${\"af8b8440182a240e16c7a1987b286f5f\"}`,\n  news: (country) =>\n    `https://api.currentsapi.services/v1/latest-news?country=${country}&apiKey=${\"bWZMYtpT0ydba_KXHp_jmvl51HdhozpKXpEE00BRYaZXl31Q\"}`,\n};\n\nconst domElements = {\n  weather: document.querySelector(\".weather-info\"),\n  news: document.querySelector(\".news-items\"),\n};\n\nmodule.exports = {\n  domElements,\n  urls,\n};\n\n\n//# sourceURL=webpack://cv-immersion-day/./src/helpers/helper_objects.js?");
+
+/***/ }),
+
+/***/ "./src/main.js":
+/*!*********************!*\
+  !*** ./src/main.js ***!
+  \*********************/
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("const axios = __webpack_require__(/*! axios */ \"./node_modules/axios/dist/browser/axios.cjs\");\nconst { domElements, urls } = __webpack_require__(/*! ./helpers/helper_objects */ \"./src/helpers/helper_objects.js\");\nconst {\n  getCountryNameFromCode,\n  displayErrors,\n  displayWeather,\n  retrieveNews,\n} = __webpack_require__(/*! ./helpers/helper_functions */ \"./src/helpers/helper_functions.js\");\n\ndocument.addEventListener(\"DOMContentLoaded\", () => {\n  retrieveLocation();\n});\n\nfunction retrieveLocation() {\n  if (navigator.geolocation) {\n    navigator.geolocation.getCurrentPosition(showPosition, displayErrors);\n  } else {\n    domElements.weather.textContent =\n      \"Geolocation is not supported by this browser.\";\n  }\n}\n\nfunction showPosition(position) {\n  const latitude = position.coords.latitude;\n  const longitude = position.coords.longitude;\n  retrieveData(latitude, longitude);\n}\n\nasync function retrieveData(latitude, longitude) {\n  try {\n    const weatherResponse = await axios.get(urls.weather(latitude, longitude));\n    const countryCode = weatherResponse.data.sys.country;\n    const country = await getCountryNameFromCode(countryCode);\n    await retrieveNews(countryCode, country);\n    displayWeather(weatherResponse);\n  } catch (error) {\n    console.error(\"Error retrieving data:\", error);\n    domElements.weather.textContent = \"Error retrieving weather data.\";\n  }\n}\n\n\n//# sourceURL=webpack://cv-immersion-day/./src/main.js?");
 
 /***/ }),
 
@@ -73,8 +93,8 @@ eval("// Axios v1.7.3 Copyright (c) 2024 Matt Zabriskie and contributors\n\n\nfu
 /******/ 	
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/my_script.js");
+/******/ 	// This entry module can't be inlined because the eval devtool is used.
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/main.js");
 /******/ 	
 /******/ })()
 ;
